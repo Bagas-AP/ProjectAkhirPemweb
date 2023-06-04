@@ -12,14 +12,14 @@ class NewsResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-    public function toArray(Request $request)
+    public function toArray($request)
     {
         return [
-            'id' => (string)$this->id,
+            'id' => $this->id,
             'title' => $this->title,
             'category' => $this->category,
             'description' => $this->description,
-            'image' => $this->image,
+            'image' => $this->image ? asset('storage/' . $this->image) : null,
             'created_at' => $this->created_at,
         ];
     }

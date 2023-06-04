@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreNewsRequest;
 use App\Http\Resources\NewsResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\News;
 
 class NewsController extends Controller
@@ -44,17 +45,26 @@ class NewsController extends Controller
      */
     public function store(StoreNewsRequest $request)
     {
-        $request->validated($request->all());
+        $validatedData = $request->validated();
+
+        $imagePath = null;
+        if ($request->file('image')->isValid()) {
+            $image = $request->file('image');
+            $imageName = Str::random(20) . '.' . $image->getClientOriginalExtension();
+            $imagePath = $image->storeAs('news', $imageName, 'public');
+        }
 
         $news = News::create([
-            'title' => $request->title,
-            'category' => $request->category,
-            'description' => $request->description,
-            'image' => $request->image
+            'title' => $validatedData['title'],
+            'category' => $validatedData['category'],
+            'description' => $validatedData['description'],
+            'image' => $imagePath
         ]);
 
         return new NewsResource($news);
     }
+
+
 
     /**
      * Display the specified resource.

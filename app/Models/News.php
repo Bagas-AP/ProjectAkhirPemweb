@@ -17,6 +17,10 @@ class News extends Model
         'image'
     ];
 
+    protected $casts = [
+        'image' => 'string',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
