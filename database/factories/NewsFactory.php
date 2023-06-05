@@ -19,7 +19,7 @@ class NewsFactory extends Factory
         return [
             'title' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),
-            'category' => $this->randomElement(['bencana', 'sport']),
+            'category' => $this->randomElement(['bencana', 'olahraga']),
         ];
     }
 }

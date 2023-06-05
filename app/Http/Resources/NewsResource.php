@@ -21,6 +21,8 @@ class NewsResource extends JsonResource
             'description' => $this->description,
             'image' => $this->image ? asset('storage/' . $this->image) : null,
             'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'user_id' => (string)$this->user->id
         ];
     }
 }

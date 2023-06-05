@@ -6,6 +6,7 @@ use App\Http\Requests\StoreNewsRequest;
 use App\Http\Resources\NewsResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use App\Models\News;
 
 class NewsController extends Controller
@@ -54,11 +55,14 @@ class NewsController extends Controller
             $imagePath = $image->storeAs('news', $imageName, 'public');
         }
 
+        $user_id = (int) Auth::user()->id;
+
         $news = News::create([
             'title' => $validatedData['title'],
             'category' => $validatedData['category'],
             'description' => $validatedData['description'],
-            'image' => $imagePath
+            'image' => $imagePath,
+            'user_id' => $user_id,
         ]);
 
         return new NewsResource($news);

@@ -14,11 +14,13 @@ class News extends Model
         'title',
         'description',
         'category',
-        'image'
+        'image',
+        'user_id'
     ];
 
     protected $casts = [
         'image' => 'string',
+        'user_id' => 'integer',
     ];
 
     public function user()
