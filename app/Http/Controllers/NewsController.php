@@ -28,9 +28,21 @@ class NewsController extends Controller
         // );
 
         // for getting all news
-        return NewsResource::collection(
-            News::all()
-        );
+        // return NewsResource::collection(
+        //     News::all()
+        // );
+
+        // $news = News::all();
+
+        // return response()->json([
+        //     'status' => 'Success',
+        //     'message' => 'Index method',
+        //     'data' => NewsResource::collection($news)
+        // ], 200);
+
+        $data = News::all();
+
+        return view('data', compact('data'));
     }
 
     /**
