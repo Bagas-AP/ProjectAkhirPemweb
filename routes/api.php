@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // public routes
+Route::get('/view/all', [NewsController::class, "index"]);
 Route::get('/view/latest', [GuestController::class, "index"]);
 Route::get('/view/{category}/{id}', [GuestController::class, "show"]);
 Route::get('/view/{category}', [GuestController::class, "showCategory"]);
